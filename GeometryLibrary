@@ -1,0 +1,64 @@
+using GeometryLibrary;
+using System;
+using System.Collections.Generic;
+
+namespace GeometryLibrary
+{
+    public interface IShape
+    {
+        double CalculateArea();
+    }
+    public class Circle : IShape
+    {
+        private double _radius;
+        public Circle(double radius)
+        {
+            _radius = radius;
+        }
+        public double CalculateArea()
+        {
+            return Math.PI * Math.Pow(_radius, 2);
+        }
+    }
+    public class Triangle : IShape
+    {
+        private double _a, _b, _c;
+        public Triangle(double a, double b, double c)
+        {
+            _a = a;
+            _b = b;
+            _c = c;
+        }
+        public double CalculateArea()
+        {
+            double s = (_a + _b + _c) / 2;
+            return Math.Sqrt(s * (s - _a) * (s - _b) * (s - _c));
+        }
+        public bool IsRightTriangle()
+        {
+            return (Math.Pow(_a, 2) == Math.Pow(_b, 2) + Math.Pow(_c, 2)) ||
+                (Math.Pow(_b, 2) == Math.Pow(_a, 2) + Math.Pow(_c, 2)) ||
+                (Math.Pow(_c, 2) == Math.Pow(_a, 2) + Math.Pow(_b, 2));
+        }
+    }
+    public static class ShapeCalculator
+    {
+        public static double CalculateArea(IShape shape)
+        {
+            return shape.CalculateArea();
+        }
+    }
+    public class Rectangle : IShape
+    {
+    private double _width, _height;
+    public Rectangle(double width, double height)
+        {
+        _width = width;
+        _height = height;
+        }
+    public double CalculateArea()
+        {
+        return _width * _height;
+        }
+    }
+}
