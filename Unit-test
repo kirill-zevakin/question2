@@ -1,0 +1,43 @@
+using GeometryLibrary;
+using NUnit.Framework;
+
+namespace GeometryLibraryTests
+{
+    [TestFixture]
+    public class ShapeCalculatorTests
+    {
+        [Test]
+        public void CalculateCircleArea_ShouldReturnCorrectArea()
+        {
+            IShape circle = new Circle(5);
+            double expectedArea = Math.PI * Math.Pow(5, 2);
+            double actualArea = ShapeCalculator.CalculateArea(circle);
+            Assert.AreEqual(expectedArea, actualArea, 0.001);
+        }
+
+        [Test]
+        public void CalculateTriangleArea_ShouldReturnCorrectArea()
+        {
+            IShape triangle = new Triangle(3, 4, 5);
+            double expectedArea = 6;
+            double actualArea = ShapeCalculator.CalculateArea(triangle);
+            Assert.AreEqual(expectedArea, actualArea);
+        }
+
+        [Test]
+        public void IsRightTriangle_ShouldReturnTrueForRightTriangle()
+        {
+            IShape triangle = new Triangle(3, 4, 5)
+            bool isRightTriangle = ((Triangle)triangle).IsRightTriangle();
+            Assert.IsTrue(isRightTriangle);
+        }
+
+        [Test]
+        public void IsRightTriangle_ShouldReturnFalseForNonRightTriangle()
+        {
+            IShape triangle = new Triangle(2, 3, 4);
+            bool isRightTriangle = ((Triangle)triangle).IsRightTriangle();
+            Assert.IsFalse(isRightTriangle);
+        }
+    }
+}
